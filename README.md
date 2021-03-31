@@ -53,8 +53,20 @@ Espero que gostem, qualquer dúvida fiquem a vontade para entrar em contato - is
 
   ```
   pip install --upgrade robotframework-seleniumlibrary
+  pip install robotframework-faker
   ```
 
+  * Instalar a library faker.
+
+    ```
+    pip install robotframework-faker
+    ```
+
+  * Instalar linguagem docker no ATOM.
+
+    ```
+    apm install language-docker
+    ```
 
 ### Estrutura do projeto ###
 
@@ -115,3 +127,16 @@ robot -d .\result -v BROWSER:headlesschrome -t "CT02: Validar exceções de logi
 * -N é o parâmetro que indica que a execução receberá um identificador (“Nome de Exemplo”). OBS.: Deve vir antes do -d.
 * -i é o parâmetro que indica que devem ser executados apenas os testes cuja a Tag seja (smoketest).
 * -v é o parâmetro que indica que será atribuído o valor (chrome) à variável (${BROWSER}) do meu teste.
+
+## Criar o build da imagem
+docker build -t run_robot ./docker_images
+
+## Consultar as imagens do seu Docker
+docker images
+
+## Remover uma imagem criada
+docker rmi run_robot
+
+
+## Rodar os testes do Robot dentro do container
+docker run --rm --name execucao_robot -v "C:\Users\55129\Documents\Projetos\WebTesting\tests":/opt/robotframework/tests -v "C:\Users\55129\Documents\Projetos\WebTesting\result":/opt/robotframework/results run_robot:latest robot -d /opt/robotframework/results /opt/robotframework/tests
